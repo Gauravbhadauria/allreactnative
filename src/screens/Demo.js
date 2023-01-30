@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {SharedElement} from 'react-navigation-shared-element';
 import Details from './Details';
 
-const Home = ({navigation}) => {
+const Demo = ({navigation}) => {
   const [data, setData] = useState([
     {image: require('../images/hulk.webp'), id: 1, title: 'Hulk'},
     {image: require('../images/ironman.webp'), id: 2, title: 'Ironman'},
@@ -45,4 +45,4 @@ const Home = ({navigation}) => {
   );
 };
 
-export default Home;
+export default Demo;

@@ -2,16 +2,21 @@ import {View, Text} from 'react-native';
 import React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
-import Home from './screens/Home';
+import Demo from './screens/Demo';
 import Details from './screens/Details';
 
 import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
+import Home1 from './screens/Home1';
+import Demo3 from './screens/Demo3';
 const Stack = createSharedElementStackNavigator();
 const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Demo3" component={Demo3} />
+        <Stack.Screen name="Home1" component={Home1} />
+        <Stack.Screen name="Home" component={Demo} />
+
         <Stack.Screen
           name="Details"
           component={Details}
