@@ -13,8 +13,9 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Demo3" component={Demo3} />
         <Stack.Screen name="Home1" component={Home1} />
+        <Stack.Screen name="Demo3" component={Demo3} />
+
         <Stack.Screen name="Home" component={Demo} />
 
         <Stack.Screen
