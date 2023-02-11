@@ -4,55 +4,91 @@ import {useNavigation} from '@react-navigation/native';
 import {SharedElement} from 'react-navigation-shared-element';
 import {Swipeable} from 'react-native-gesture-handler';
 const {width, height} = Dimensions.get('window');
-const Item = ({item, index, onOpenComponent}) => {
+
+const Item = ({item, index, onComponentOpen, onSilent, onDelete, onEdit}) => {
   const navigation = useNavigation();
   const ref = useRef();
   const leftSwipe = () => {
     return (
-      <View
-        style={{
-          height: 100,
-          flexDirection: 'row',
-        }}>
+      <TouchableOpacity
+        style={{backgroundColor: '#fff', height: 100, flexDirection: 'row'}}
+        onPress={() => {}}>
         <TouchableOpacity
           style={{
+            width: 100,
+            height: 100,
             backgroundColor: 'red',
             justifyContent: 'center',
             alignItems: 'center',
+          }}
+          onPress={() => {
+            ref.current.close();
+            onDelete(index);
           }}>
-          <Text style={{color: '#fff', paddingLeft: 20, paddingRight: 20}}>
-            Delete
-          </Text>
+          <Image
+            source={require('../images/delete.png')}
+            style={{width: 30, height: 30, tintColor: '#fff'}}
+          />
         </TouchableOpacity>
         <TouchableOpacity
           style={{
-            backgroundColor: 'blue',
+            width: 100,
+            height: 100,
+            backgroundColor: '#3D7BED',
             justifyContent: 'center',
             alignItems: 'center',
+          }}
+          onPress={() => {
+            ref.current.close();
+            onEdit(index);
           }}>
-          <Text style={{color: '#fff', paddingLeft: 20, paddingRight: 20}}>
-            Edit
-          </Text>
+          <Image
+            source={require('../images/editing.png')}
+            style={{width: 30, height: 30, tintColor: '#fff'}}
+          />
+        </TouchableOpacity>
+      </TouchableOpacity>
+    );
+  };
+  const rightSwipe = () => {
+    return (
+      <View
+        style={{backgroundColor: '#fff', height: 100, flexDirection: 'row'}}>
+        <TouchableOpacity
+          style={{
+            width: 100,
+            height: 100,
+            backgroundColor: 'green',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          onPress={() => {
+            ref.current.close();
+            onSilent(index);
+          }}>
+          <Image
+            source={require('../images/silent.png')}
+            style={{width: 30, height: 30, tintColor: '#fff'}}
+          />
         </TouchableOpacity>
       </View>
     );
   };
   useEffect(() => {
-    console.log(item.opened);
     if (item.opened == false) {
       ref.current.close();
     }
   });
   return (
     <Swipeable
-      renderLeftActions={leftSwipe}
       ref={ref}
-      friction={2}
+      renderLeftActions={leftSwipe}
+      renderRightActions={rightSwipe}
       onSwipeableOpen={() => {
         console.log('open');
-        onOpenComponent(index);
+        onComponentOpen(index);
       }}>
-      <View
+      <TouchableOpacity
         style={{
           width: width,
           marginBottom: 10,
@@ -79,7 +115,7 @@ const Item = ({item, index, onOpenComponent}) => {
         <Text style={{fontSize: 16, fontWeight: '600', marginLeft: 20}}>
           {'Shoes ' + (index + 1)}
         </Text>
-      </View>
+      </TouchableOpacity>
     </Swipeable>
   );
 };

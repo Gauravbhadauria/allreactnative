@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   FlatList,
   Dimensions,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import {SharedElement} from 'react-navigation-shared-element';
@@ -27,23 +28,21 @@ const Home1 = ({navigation}) => {
     {image: require('../images/shoes7.webp'), id: 7, opened: false},
   ]);
 
-  const onOpen = index => {
-    let temp = data;
-    temp.map((itm, i) => {
-      if (i == index) {
-        itm.opened = true;
+  const openCompoent = ind => {
+    let tempData = data;
+    tempData.map((item, index) => {
+      if (index == ind) {
+        item.opened = true;
       } else {
-        itm.opened = false;
+        item.opened = false;
       }
     });
-    let tempData = [];
-    temp.map(item => {
-      tempData.push(item);
+    let temp = [];
+    tempData.map(item => {
+      temp.push(item);
     });
-    console.log(temp);
-    setData(tempData);
+    setData(temp);
   };
-
   return (
     <View style={{flex: 1}}>
       <FlatList
@@ -53,8 +52,17 @@ const Home1 = ({navigation}) => {
             <Item
               item={item}
               index={index}
-              onOpenComponent={ind => {
-                onOpen(ind);
+              onComponentOpen={x => {
+                openCompoent(x);
+              }}
+              onSilent={x => {
+                console.log(' silent ' + x);
+              }}
+              onDelete={x => {
+                console.log(' delete ' + x);
+              }}
+              onEdit={x => {
+                console.log(' edit ' + x);
               }}
             />
           );
