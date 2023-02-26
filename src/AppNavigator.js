@@ -8,12 +8,18 @@ import Details from './screens/Details';
 import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 import Home1 from './screens/Home1';
 import Demo3 from './screens/Demo3';
+import Login from './screens/Login';
 const Stack = createSharedElementStackNavigator();
 const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home1" component={Home1} />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{headerShown: false}}
+        />
+        {/* <Stack.Screen name="Home1" component={Home1} />
         <Stack.Screen name="Demo3" component={Demo3} />
 
         <Stack.Screen name="Home" component={Demo} />
@@ -26,7 +32,7 @@ const AppNavigator = () => {
             const {image} = route.params;
             return [`image` + image.id];
           }}
-        />
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

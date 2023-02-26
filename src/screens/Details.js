@@ -1,11 +1,20 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
+import {View, Text, TouchableOpacity, Image, Alert} from 'react-native';
+import React, {useEffect} from 'react';
 import {SharedElement} from 'react-navigation-shared-element';
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
 
 const Details = () => {
   const route = useRoute();
+
+  const navigation = useNavigation();
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('beforeRemove', e => {
+      return true;
+    });
+
+    return unsubscribe;
+  }, [navigation]);
   return (
     <View style={{flex: 1}}>
       <SharedElement id={'image' + route.params.image.id}>
